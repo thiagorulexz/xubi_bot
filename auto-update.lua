@@ -233,11 +233,29 @@ function XubiUpdate.checkOnce(onUpToDate, onUpdated, onFailed)
     tryManifest(XubiUpdate.MAX_RETRIES)
 end
 
+-- depois de gravar os arquivos novos no disco, forca o client a recarregar
+-- o script (reload() ja existe no xubira - bk.lua e e usado nesse mesmo
+-- sentido -- ex.: apos trocar de vocacao). A proxima execucao le os
+-- arquivos JA atualizados do disco e cai direto no onUpToDate().
+local function forceReload(novaVersao)
+    log("atualizado para " .. tostring(novaVersao) .. " -- forcando reload()...")
+    if type(reload) == "function" then
+        local ok, err = safe(reload)
+        if not ok then
+            log("reload() falhou (" .. tostring(err) .. "); o update ja esta gravado no disco, mas precisa reabrir o bot manualmente.")
+        end
+        -- se reload() funcionar, o script inteiro reinicia aqui -- nada
+        -- depois disso deve rodar nesta execucao.
+        return true
+    end
+    log("reload() indisponivel neste ambiente; grava no disco mas nao consegue reiniciar sozinho.")
+    return false
+end
+
 --------------------------------------------------
--- ORQUESTRADOR: repete o ciclo ate a versao bater (ou desistir com
--- seguranca depois de MAX_CYCLES, pra nunca travar o login pra sempre)
+-- ORQUESTRADOR
 --------------------------------------------------
--- onReady()          : pode entrar no bot normalmente
+-- onReady()          : versao ja bate, pode entrar no bot normalmente
 -- onBlocked(motivo)  : nao foi possivel garantir a versao certa; NAO entra no bot
 function XubiUpdate.run(onReady, onBlocked)
     if not envReady() then
@@ -261,8 +279,14 @@ function XubiUpdate.run(onReady, onBlocked)
         XubiUpdate.checkOnce(
             onReady,
             function(novaVersao)
-                log("atualizado para " .. novaVersao .. ", conferindo de novo...")
-                step()
+                -- update gravado com sucesso: a forma "normal" de continuar
+                -- e reiniciar o script (reload), nao seguir rodando o
+                -- codigo antigo que ja estava carregado nesta sessao.
+                if not forceReload(novaVersao) then
+                    -- sem reload() disponivel: cai pro fallback de reconferir
+                    -- na mesma sessao (menos ideal, mas nao trava o login).
+                    step()
+                end
             end,
             function(motivo)
                 log("ciclo de update falhou (" .. motivo .. "), refazendo em " .. XubiUpdate.RETRY_DELAY_MS .. "ms...")
