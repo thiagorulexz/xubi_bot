@@ -34,7 +34,7 @@ local XubiUpdate = {}
 -- CONFIG
 --------------------------------------------------
 XubiUpdate.VERSION       = "1.0.0"  -- versao "instalada" deste bot (bump isso a cada release)
-XubiUpdate.MANIFEST_URL  = "https://raw.githubusercontent.com/thiagorulexz/xubi_bot/main/manifest.json"
+XubiUpdate.MANIFEST_URL  = "https://raw.githubusercontent.com/thiagorulexz/xubi_bot/refs/heads/main/manifest.json"
 XubiUpdate.MAX_RETRIES   = 3        -- tentativas por arquivo/manifest antes de desistir do ciclo
 XubiUpdate.RETRY_DELAY_MS = 4000    -- espera entre tentativas
 XubiUpdate.MAX_CYCLES    = 5        -- quantas vezes repete "checa -> atualiza -> confere de novo"
