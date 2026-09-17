@@ -2,6 +2,5 @@
   "version": "1.0.1",
   "repo": "thiagorulexz/xubi_bot",
   "branch": "main",
-  "main": "bot/vBot/xubira.lua",
   "dir": "bot"
 }
