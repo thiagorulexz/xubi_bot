@@ -1,10 +1,7 @@
 {
   "version": "1.0.1",
-  "main": "https://raw.githubusercontent.com/thiagorulexz/xubi_bot/refs/heads/main/teste_main.lua",
-  "files": [
-    {
-      "path": "{bot}/teste_update.lua",
-      "url": "https://raw.githubusercontent.com/thiagorulexz/xubi_bot/refs/heads/main/teste_update.lua"
-    }
-  ]
+  "repo": "thiagorulexz/xubi_bot",
+  "branch": "main",
+  "main": "bot/vBot/xubira.lua",
+  "dir": "bot"
 }
