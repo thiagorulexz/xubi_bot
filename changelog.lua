@@ -8,7 +8,7 @@
 -- (return { "linha", "linha" }). O bot aceita os tres.
 
 return [[
-v0.0.2
+v0.0.3
  - Payhunt: o "correr na sala" voltou a funcionar em perfil novo. A distancia
    dos cantos e o alcance do deslize viraram valores fixos do script, entao
    nao dependem mais do que estava salvo no storage.
