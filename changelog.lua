@@ -8,7 +8,7 @@
 -- (return { "linha", "linha" }). O bot aceita os tres.
 
 return [[
-v1.4.3
+v0.0.2
  - Payhunt: o "correr na sala" voltou a funcionar em perfil novo. A distancia
    dos cantos e o alcance do deslize viraram valores fixos do script, entao
    nao dependem mais do que estava salvo no storage.
@@ -19,12 +19,8 @@ v1.4.3
    fica guardado em profile_<n>.replaced.json, por seguranca.
  - Carimbos de perfil antigos (xubi_inuse_*) sao apagados sozinhos quando o
    dono muda.
-
-v1.4.2
  - Face Target: a hotkey nasce vazia em vez de nil.
  - Exp HUD: nao quebra mais em storage salvo por versao antiga
    ("attempt to get length of field 'samples'").
-
-v1.4.1
  - Primeira versao com auto-update.
 ]]
