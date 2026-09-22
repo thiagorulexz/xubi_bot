@@ -8,28 +8,6 @@
 -- (return { "linha", "linha" }). O bot aceita os tres.
 
 return [[
-v0.0.4
-Removido os erros ERROR: [BOT] Invalid hotkey keys da Mw e Grav(X)
-Removido o erro que ao alterar a hotkey de Mw e Grav era necessário reiniciar o bot para ter efeito(X)
-Removido o Auto Bless do vBot deixando somente o do XubiBot(X)
-Corrigido problema no Force Exura Sio do Druid(X)
-Corrigido o Tempo do Exura Gran Ico e Utito Tempo para Knight(X)
-Adicionado o Exura gran ico na aba de Cooldowns de Knight(X)
-Corrigido bug do Force cast no trainer (X)
-Retirado o Bless system do vBot deixando somente o do XubiBot(X)
-Corrigido o problema da bless por dinheiro(X)
-Corrigido bug que o exura sio do druid não estava validando de acordo com os valores de Friend Healer(X)
-Adicionado Level no Battle List(X)
-Corrigido o bug do Look warning error(X)
-Corrigido a Backpack Padrão do código (X)
-Corrigido o Hold Target(X)
-Criado Enemy Guild Low Level(X)
-Corrigido o TargetBroken de Enemy Guild Low Level(X)
-Criado um script para usar o Task Scroll sempre que estiver atacando monstro e ela acabar(X)
-Corrigido um bug no Friend Healer agora usa UH + Pot (x)
-Foi feito Otimizações no código e arrumados Bugs(X)
-Corrigido os erros WARNING: widget '' was not explicitly destroyed(X)
-
 v0.0.3
  - Payhunt: o "correr na sala" voltou a funcionar em perfil novo. A distancia
    dos cantos e o alcance do deslize viraram valores fixos do script, entao
