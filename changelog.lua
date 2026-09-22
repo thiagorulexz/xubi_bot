@@ -8,7 +8,7 @@
 -- (return { "linha", "linha" }). O bot aceita os tres.
 
 return [[
-v0.0.4
+v0.0.4 -- 22/09/26
 Removido os erros ERROR: [BOT] Invalid hotkey keys da Mw e Grav(X)
 Removido o erro que ao alterar a hotkey de Mw e Grav era necessário reiniciar o bot para ter efeito(X)
 Removido o Auto Bless do vBot deixando somente o do XubiBot(X)
@@ -30,7 +30,7 @@ Corrigido um bug no Friend Healer agora usa UH + Pot (x)
 Foi feito Otimizações no código e arrumados Bugs(X)
 Corrigido os erros WARNING: widget '' was not explicitly destroyed(X)
 
-v0.0.3
+v0.0.3 -- 19/09/26
  - Payhunt: o "correr na sala" voltou a funcionar em perfil novo. A distancia
    dos cantos e o alcance do deslize viraram valores fixos do script, entao
    nao dependem mais do que estava salvo no storage.
