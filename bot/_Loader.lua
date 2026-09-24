@@ -28,7 +28,7 @@ local luaFiles = {
   -- modules manually in their own profile when they actually use them.
   -- "BotServer",
   "alarms",
-  "Conditions",
+  -- "Conditions",
   -- "Equipper",
   -- "pushmax",
   -- "combo",
@@ -38,8 +38,8 @@ local luaFiles = {
   "ingame_editor",
   -- "Dropper",
   -- "Containers",
-  "quiver_manager",
-  "quiver_label",
+  -- "quiver_manager",
+  -- "quiver_label",
   -- "tools",
   -- "antiRs",
   -- "depot_withdraw",
@@ -48,20 +48,15 @@ local luaFiles = {
   "exeta",
   -- "analyzer",
   "spy_level",
-  "supplies",
-  "depositer_config",
+  -- "supplies",
+  -- "depositer_config",
   "npc_talk",
   "xeno_menu",
   -- "hold_target",
-  "cavebot_control_panel",
+  -- "cavebot_control_panel",
   "xubira"
 }
 
 for i, file in ipairs(luaFiles) do
   loadScript(file)
 end
-
-setDefaultTab("Main")
-UI.Separator()
-UI.Label("Private Scripts:")
-UI.Separator()
