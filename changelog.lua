@@ -8,6 +8,13 @@
 -- (return { "linha", "linha" }). O bot aceita os tres.
 
 return [[
+v0.0.6 -- 25/09/2026
+Refeito Icons dos ataques
+Adicionado Ant Push
+Adicionado Arround Flowers
+Adicionado Full Chase
+Arrumado Sistema Club Kina
+
 v0.0.5 -- 24/09/2026
 Remodelado o sistema de ícones
 Ícones faltantes adicionados
