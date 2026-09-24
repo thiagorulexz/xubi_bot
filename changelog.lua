@@ -8,27 +8,37 @@
 -- (return { "linha", "linha" }). O bot aceita os tres.
 
 return [[
+v0.0.5 -- 24/09/2026
+Remodelado o sistema de ícones
+Ícones faltantes adicionados
+Remodelado o sistema de Hotkeys
+Hotkeys faltantes adicionadas
+Corrigido as Box do [Xubi]: Follow, Status, Atk Leader
+Removida box de monstros
+Adicionado Atk Leader System
+Filtro aba Payhunt
+
 v0.0.4 -- 22/09/26
-Removido os erros ERROR: [BOT] Invalid hotkey keys da Mw e Grav(X)
-Removido o erro que ao alterar a hotkey de Mw e Grav era necessário reiniciar o bot para ter efeito(X)
-Removido o Auto Bless do vBot deixando somente o do XubiBot(X)
-Corrigido problema no Force Exura Sio do Druid(X)
-Corrigido o Tempo do Exura Gran Ico e Utito Tempo para Knight(X)
-Adicionado o Exura gran ico na aba de Cooldowns de Knight(X)
-Corrigido bug do Force cast no trainer (X)
-Retirado o Bless system do vBot deixando somente o do XubiBot(X)
-Corrigido o problema da bless por dinheiro(X)
-Corrigido bug que o exura sio do druid não estava validando de acordo com os valores de Friend Healer(X)
-Adicionado Level no Battle List(X)
-Corrigido o bug do Look warning error(X)
-Corrigido a Backpack Padrão do código (X)
-Corrigido o Hold Target(X)
-Criado Enemy Guild Low Level(X)
-Corrigido o TargetBroken de Enemy Guild Low Level(X)
-Criado um script para usar o Task Scroll sempre que estiver atacando monstro e ela acabar(X)
-Corrigido um bug no Friend Healer agora usa UH + Pot (x)
-Foi feito Otimizações no código e arrumados Bugs(X)
-Corrigido os erros WARNING: widget '' was not explicitly destroyed(X)
+Removido os erros ERROR: [BOT] Invalid hotkey keys da Mw e Grav
+Removido o erro que ao alterar a hotkey de Mw e Grav era necessário reiniciar o bot para ter efeito
+Removido o Auto Bless do vBot deixando somente o do XubiBot
+Corrigido problema no Force Exura Sio do Druid
+Corrigido o Tempo do Exura Gran Ico e Utito Tempo para Knight
+Adicionado o Exura gran ico na aba de Cooldowns de Knight
+Corrigido bug do Force cast no trainer 
+Retirado o Bless system do vBot deixando somente o do XubiBot
+Corrigido o problema da bless por dinheiro
+Corrigido bug que o exura sio do druid não estava validando de acordo com os valores de Friend Healer
+Adicionado Level no Battle List
+Corrigido o bug do Look warning error
+Corrigido a Backpack Padrão do código 
+Corrigido o Hold Target
+Criado Enemy Guild Low Level
+Corrigido o TargetBroken de Enemy Guild Low Level
+Criado um script para usar o Task Scroll sempre que estiver atacando monstro e ela acabar
+Corrigido um bug no Friend Healer agora usa UH + Pot 
+Foi feito Otimizações no código e arrumados Bugs
+Corrigido os erros WARNING: widget '' was not explicitly destroyed
 
 v0.0.3 -- 19/09/26
  - Payhunt: o "correr na sala" voltou a funcionar em perfil novo. A distancia
