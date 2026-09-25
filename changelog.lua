@@ -9,7 +9,8 @@
 
 return [[
 v0.0.6 -- 25/09/2026
-Refeito Icons dos ataques
+Refeito Icones dos ataques
+Corrigido alguns icones reportados 
 Adicionado Ant Push
 Adicionado Arround Flowers
 Adicionado Full Chase
