@@ -8,6 +8,16 @@
 -- (return { "linha", "linha" }). O bot aceita os tres.
 
 return [[
+V0.0.7 -- 26/09/2026
+Refeita a key de todos os usuarios
+Corrigido Spells na Payhunt
+Adicionado Outfith Manager
+Corrigido falhas internas
+Corrigido o Face target no PVP
+Corrigido a UI do Event Viewer
+Corrigido AutoCombo v_Bot
+Corrigido TargetBot Profiles
+
 v0.0.6 -- 25/09/2026
 Refeito Icones dos ataques
 Corrigido alguns icones reportados 
