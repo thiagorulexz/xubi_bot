@@ -8,6 +8,17 @@
 -- (return { "linha", "linha" }). O bot aceita os tres.
 
 return [[
+V0.0.8 -- 28/09/2026
+Corrigido velocidade do coletar itens
+Reescrito AutoCombo por completo
+Reescrito Friend Healer por completo
+Coletor de flor
+Jogar flor onde o mouse esta
+Removido a obrigatoriedade do abrir aba ao pm
+Corrigido bugs conhecidos
+Adicionado Exiva Navigator
+
+
 V0.0.7 -- 26/09/2026
 Refeita a key de todos os usuarios
 Corrigido Spells na Payhunt
