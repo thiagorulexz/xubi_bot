@@ -8,6 +8,15 @@
 -- (return { "linha", "linha" }). O bot aceita os tres.
 
 return [[
+V0.0.9
+Melhorado o sistema de chaves do bot
+Revertido o novo ATK Leader
+Corrigido Problema do Target em Monstros
+Corrigidos Problemas interno
+Corrigido quando bloqueado na payhunt
+Melhorado o sistema de cura do bot
+Melhorado o sistema de Friend Healer (UH)
+
 V0.0.8 -- 28/09/2026
 Corrigido velocidade do coletar itens
 Reescrito AutoCombo por completo
