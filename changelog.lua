@@ -8,7 +8,15 @@
 -- (return { "linha", "linha" }). O bot aceita os tres.
 
 return [[
-V0.0.9
+V0.1.0 -- 29/09/2026
+Corrigido dimensões do Exiva Navigator
+Corrigido posição do Exiva Navigator
+Corrigido o antigo ATK Leader
+Corrigido Arround Flower (MW e Grav)
+Corrigido Swap da aura no trainer com afk bot desligado
+Falhas criticas do código, que gerou nova atualizacao no mesmo dia
+
+V0.0.9 -- 29/09/2026
 Melhorado o sistema de chaves do bot
 Revertido o novo ATK Leader
 Corrigido Problema do Target em Monstros
