@@ -8,6 +8,27 @@
 -- (return { "linha", "linha" }). O bot aceita os tres.
 
 return [[
+V0.1.1 -- 03/10/2026
+Corrigido acentuação do bot
+Corrigido Shader Outfith
+Shader Outfith Compartilhado entre jogadores
+Corrigido Summon
+Corrigido Jogadores Por Guild
+Alterado local do Jogadores por Guild
+Jogadores por guild mostra em laranja quem está payhunt
+Botão Exiva na lista de jogadores
+Corrigido Coletar Itens
+Adicionado Paralyze System
+Auto Exiva Guild (Jogadores upando)
+Alterado a forma como abre o Monitor de Stack
+Alterado botão do outfith manager
+FaceTarget Ignorando Summon
+Corrigido Layout do Configurar Bot
+Corrigido Suicide Payhunt
+Corrigido Ant Paralyze do Knight
+Habilitar e desabilitar os filtros de chat
+Adicionado tempo Amuleto
+
 V0.1.0 -- 29/09/2026
 Corrigido dimensões do Exiva Navigator
 Corrigido posição do Exiva Navigator
