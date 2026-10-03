@@ -8,6 +8,10 @@
 -- (return { "linha", "linha" }). O bot aceita os tres.
 
 return [[
+V0.1.2 -- 03/10/2026
+Peço desculpa pela ultima atualização, já estou procurando a raiz do problema para atualizar novamente
+Revertido a Atualização v0.1.1 para v0.1.0
+
 V0.1.1 -- 03/10/2026
 Corrigido acentuação do bot
 Corrigido Shader Outfith
