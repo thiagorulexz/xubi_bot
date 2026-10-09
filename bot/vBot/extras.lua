@@ -115,16 +115,7 @@ addItem("shovel", "Shovel Item", 9596, leftPanel, "This item will be used in var
 addItem("machete", "Machete Item", 9596, leftPanel, "This item will be used in various bot related scripts as default machete item.")
 addItem("scythe", "Scythe Item", 9596, leftPanel, "This item will be used in various bot related scripts as default scythe item.")
 addCheckBox("pathfinding", "CaveBot Pathfinding", true, leftPanel, "Cavebot will automatically search for first reachable waypoint after missing 10 goto's.")
-addScrollBar("talkDelay", "Global NPC Talk Delay", 0, 2000, 1000, leftPanel, "Breaks between each talk action in cavebot (time in miliseconds).")
-addScrollBar("looting", "Max Loot Distance", 0, 50, 40, leftPanel, "Every loot corpse futher than set distance (in sqm) will be ignored and forgotten.")
-addScrollBar("lootDelay", "Loot Delay", 0, 1000, 200, leftPanel, "Wait time for loot container to open. Lower value means faster looting. \n WARNING if you are having looting issues(e.g. container is locked in closing/opnening), increase this value.")
-addScrollBar("huntRoutes", "Hunting Rounds Limit", 0, 300, 50, leftPanel, "Round limit for supply check, if character already made more rounds than set, on next supply check will return to city.")
-addScrollBar("killUnder", "Kill monsters below", 0, 100, 1, leftPanel, "Force TargetBot to kill added creatures when they are below set percentage of health - will ignore all other TargetBot settings.")
 addScrollBar("gotoMaxDistance", "Max GoTo Distance", 0, 127, 30, leftPanel, "Maximum distance to next goto waypoint for the bot to try to reach.")
-addCheckBox("lootLast", "Start loot from last corpse", true, leftPanel, "Looting sequence will be reverted and bot will start looting newest bodies.")
-addCheckBox("joinBot", "Join TargetBot and CaveBot", false, leftPanel, "Cave and Target tabs will be joined into one.")
-addCheckBox("reachable", "Target only pathable mobs", false, leftPanel, "Ignore monsters that can't be reached.")
-
 addCheckBox("title", "Custom Window Title", true, rightPanel, "Personalize OTCv8 window name according to character specific.")
 if true then
   local vocText = ""
@@ -142,7 +133,7 @@ if true then
   macro(5000, function()
     if settings.title then
       if hppercent() > 0 then
-          g_window.setTitle("Tibia - " .. name() .. " - " .. lvl() .. "lvl " .. vocText)
+          g_window.setTitle("Tibia - " .. name() .. " - XubiBot")
       else
           g_window.setTitle("Tibia - " .. name() .. " - DEAD")
       end
@@ -212,46 +203,6 @@ if true then
   end
 end
 
-
-addCheckBox("timers", "MW & WG Timers", true, rightPanel, "Show times for Magic Walls and Wild Growths.")
-if true then
-  local activeTimers = {}
-
-  onAddThing(function(tile, thing)
-    if not settings.timers then return end
-    if not thing:isItem() then
-      return
-    end
-    local timer = 0
-    if thing:getId() == 2128 then -- active magic wall id
-      timer = 20000 -- mwall time
-    elseif thing:getId() == 2130 then -- wg id
-      timer = 45000 -- wg time
-    else
-      return
-    end
-
-    local pos = tile:getPosition().x .. "," .. tile:getPosition().y .. "," .. tile:getPosition().z
-    if not activeTimers[pos] or activeTimers[pos] < now then    
-      activeTimers[pos] = now + timer
-    end
-    tile:setTimer(activeTimers[pos] - now)
-  end)
-
-  onRemoveThing(function(tile, thing)
-    if not settings.timers then return end
-    if not thing:isItem() then
-      return
-    end
-    if (thing:getId() == 2128 or thing:getId() == 2130) and tile:getGround() then
-      local pos = tile:getPosition().x .. "," .. tile:getPosition().y .. "," .. tile:getPosition().z
-      activeTimers[pos] = nil
-      tile:setTimer(0)
-    end  
-  end)
-end
-
-
 addCheckBox("antiKick", "Anti - Kick", true, rightPanel, "Turn every 10 minutes to prevent kick.")
 if true then
   macro(600*1000, function()
@@ -259,66 +210,6 @@ if true then
     local dir = player:getDirection()
     turn((dir + 1) % 4)
     schedule(50, function() turn(dir) end)
-  end)
-end
-
-
-addCheckBox("stake", "Skin Monsters", false, leftPanel, "Automatically skin & stake corpses when cavebot is enabled")
-if true then
-  local knifeBodies = {4286, 4272, 4173, 4011, 4025, 4047, 4052, 4057, 4062, 4112, 4212, 4321, 4324, 4327, 10352, 10356, 10360, 10364} 
-  local stakeBodies = {4097, 4137, 8738, 18958}
-  local fishingBodies = {9582}
-  macro(500, function()
-      if not CaveBot.isOn() or not settings.stake then return end
-      for i, tile in ipairs(g_map.getTiles(posz())) do
-        local item = tile:getTopThing()
-        if item and item:isContainer() then
-          if table.find(knifeBodies, item:getId()) and findItem(5908) then
-              CaveBot.delay(550)
-              useWith(5908, item)
-              return
-          end
-          if table.find(stakeBodies, item:getId()) and findItem(5942) then
-              CaveBot.delay(550)
-              useWith(5942, item)
-              return
-          end
-          if table.find(fishingBodies, item:getId()) and findItem(3483) then
-              CaveBot.delay(550)
-              useWith(3483, item)
-              return
-          end
-        end
-      end
-  end)
-end
-
-
-addCheckBox("oberon", "Auto Reply Oberon", true, rightPanel, "Auto reply to Grand Master Oberon talk minigame.")
-if true then
-  onTalk(function(name, level, mode, text, channelId, pos)
-    if not settings.oberon then return end
-    if mode == 34 then
-        if string.find(text, "world will suffer for") then
-            say("Are you ever going to fight or do you prefer talking?")
-        elseif string.find(text, "feet when they see me") then
-            say("Even before they smell your breath?")
-        elseif string.find(text, "from this plane") then
-            say("Too bad you barely exist at all!") 
-        elseif string.find(text, "ESDO LO") then
-            say("SEHWO ASIMO, TOLIDO ESD") 
-        elseif string.find(text, "will soon rule this world") then
-            say("Excuse me but I still do not get the message!") 
-        elseif string.find(text, "honourable and formidable") then
-            say("Then why are we fighting alone right now?") 
-        elseif string.find(text, "appear like a worm") then
-            say("How appropriate, you look like something worms already got the better of!") 
-        elseif string.find(text, "will be the end of mortal") then
-            say("Then let me show you the concept of mortality before it!") 
-        elseif string.find(text, "virtues of chivalry") then
-            say("Dare strike up a Minnesang and you will receive your last accolade!") 
-        end
-    end
   end)
 end
 
@@ -383,215 +274,6 @@ if true then
         end
       end)
     end
-  end)
-end
-
-
-addCheckBox("suppliesControl", "TargetBot off if low supply", false, leftPanel, "Turn off TargetBot if either one of supply amount is below 50% of minimum.")
-if true then
-  macro(500, function()
-    if not settings.suppliesControl then return end
-    if TargetBot.isOff() then return end
-    if CaveBot.isOff() then return end
-    if type(hasSupplies()) == 'table' then
-        TargetBot.setOff()
-    end
-  end)
-end
-
-addCheckBox("holdMwall", "Hold MW/WG", true, rightPanel, "Mark tiles with below hotkeys to automatically use Magic Wall or Wild Growth")
-addTextEdit("holdMwHot", "Magic Wall Hotkey: ", "F5", rightPanel)
-addTextEdit("holdWgHot", "Wild Growth Hotkey: ", "F6", rightPanel)
-if true then
-
-  local hold = 0
-  local mwHot
-  local wgHot
-
-  local candidates = {}
-  local m = macro(20, function()
-    mwHot = settings.holdMwHot
-    wgHot = settings.holdWgHot
-    
-    if not settings.holdMwall then return end
-      if #candidates == 0 then return end
-
-      for i, pos in pairs(candidates) do
-        local tile = g_map.getTile(pos)
-        if tile then
-          if tile:getText():len() == 0 then 
-            table.remove(candidates, i)
-          end
-          local rune = tile:getText() == "HOLD MW" and 3180 or tile:getText() == "HOLD WG" and 3156
-          if tile:canShoot() and not isInPz() and tile:isWalkable() and tile:getTopUseThing():getId() ~= 2130 then
-            if math.abs(player:getPosition().x-tile:getPosition().x) < 8 and math.abs(player:getPosition().y-tile:getPosition().y) < 6 then
-              return useWith(rune, tile:getTopUseThing())
-            end
-          end
-        end
-      end
-  end)
-
-  onRemoveThing(function(tile, thing)
-    if not settings.holdMwall then return end
-      if thing:getId() ~= 2129 then return end
-      if tile:getText():find("HOLD") then
-          table.insert(candidates, tile:getPosition())
-          local rune = tile:getText() == "HOLD MW" and 3180 or tile:getText() == "HOLD WG" and 3156
-          if math.abs(player:getPosition().x-tile:getPosition().x) < 8 and math.abs(player:getPosition().y-tile:getPosition().y) < 6 then
-            return useWith(rune, tile:getTopUseThing())
-          end
-      end
-  end)
-
-  onAddThing(function(tile, thing)
-    if not settings.holdMwall then return end
-      if m.isOff() then return end
-      if thing:getId() ~= 2129 then return end
-      if tile:getText():len() > 0 then
-          table.remove(candidates, table.find(candidates,tile))
-      end
-  end)
-
-  onKeyDown(function(keys)
-    local wsadWalking = modules.game_walking.wsadWalking
-    if not wsadWalking then return end
-    if not settings.holdMwall then return end
-    if m.isOff() then return end
-    if keys ~= mwHot and keys ~= wgHot then return end
-    hold = now
-
-    local tile = getTileUnderCursor()
-    if not tile then return end
-
-    if tile:getText():len() > 0 then
-        tile:setText("")
-    else
-        if keys == mwHot then
-            tile:setText("HOLD MW")
-        else
-            tile:setText("HOLD WG")
-        end
-        table.insert(candidates, tile:getPosition())
-    end
-  end)
-
-  onKeyPress(function(keys)
-    local wsadWalking = modules.game_walking.wsadWalking
-    if not wsadWalking then return end
-    if not settings.holdMwall then return end
-    if m.isOff() then return end
-    if keys ~= mwHot and keys ~= wgHot then return end
-
-    if (hold - now) < -1000 then
-      candidates = {}
-      for i, tile in ipairs(g_map.getTiles(posz())) do
-        local text = tile:getText()
-        if text:find("HOLD") then
-          tile:setText("")
-        end
-      end
-    end
-  end)
-end
-
-addCheckBox("checkPlayer", "Check Players", true, rightPanel, "Auto look on players and mark level and vocation on character model")
-if true then
-  local found
-  local function checkPlayers()
-    for i, spec in ipairs(getSpectators()) do
-      if spec:isPlayer() and spec:getText() == "" and spec:getPosition().z == posz() and spec ~= player then
-          g_game.look(spec)
-          found = now
-      end
-    end
-  end
-  if settings.checkPlayer then 
-    schedule(500, function()
-      checkPlayers()
-    end)
-  end
-
-  onPlayerPositionChange(function(x,y)
-    if not settings.checkPlayer then return end
-    if x.z ~= y.z then
-      schedule(20, function() checkPlayers() end)
-    end
-  end)
-
-  onCreatureAppear(function(creature)
-    if not settings.checkPlayer then return end
-    if creature:isPlayer() and creature:getText() == "" and creature:getPosition().z == posz() and creature ~= player then
-        g_game.look(creature)
-        found = now
-    end
-  end)
-
-  local regex = [[You see ([^\(]*) \(Level ([0-9]*)\)((?:.)* of the ([\w ]*),|)]]
-  onTextMessage(function(mode, text)
-    if not settings.checkPlayer then return end
-
-    local re = regexMatch(text, regex)
-    if #re ~= 0 then
-        local name = re[1][2]
-        local level = re[1][3]
-        local guild = re[1][5] or ""
-
-        if guild:len() > 10 then
-          guild = guild:sub(1,10) -- change to proper (last) values
-          guild = guild.."..."
-        end
-        local voc
-        if text:lower():find("sorcerer") then
-            voc = "MS"
-        elseif text:lower():find("druid") then
-            voc = "ED"
-        elseif text:lower():find("knight") then
-            voc = "EK"
-        elseif text:lower():find("paladin") then
-            voc = "RP"
-        end
-        local creature = getCreatureByName(name)
-        if creature then
-            creature:setText("\n"..level..voc.."\n"..guild)
-        end
-        if found and now - found < 500 then
-          modules.game_textmessage.clearMessages()
-        end
-    end
-  end)
-end
-
-addCheckBox("nextBackpack", "Open Next Loot Container", true, leftPanel, "Auto open next loot container if full - has to have the same ID.")
-  local function openNextLootContainer()
-    if not settings.nextBackpack then return end
-    local containers = getContainers()
-    local lootCotaniersIds = CaveBot.GetLootContainers()
-
-    for i, container in ipairs(containers) do
-      local cId = container:getContainerItem():getId()
-      if containerIsFull(container) then
-        if table.find(lootCotaniersIds, cId) then
-          for _, item in ipairs(container:getItems()) do
-            if item:getId() == cId then
-              return g_game.open(item, container)
-            end
-          end
-        end
-      end
-    end
-  end
-if true then
-  onContainerOpen(function(container, previousContainer)
-    schedule(100, function()
-      openNextLootContainer()
-    end)
-  end)
-
-  onAddItem(function(container, slot, item, oldItem)
-    schedule(100, function()
-      openNextLootContainer()
-    end)
   end)
 end
 
