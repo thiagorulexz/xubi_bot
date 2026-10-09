@@ -8,6 +8,15 @@
 -- (return { "linha", "linha" }). O bot aceita os tres.
 
 return [[
+V0.1.3 -- 09/10/2026
+Otimização melhorada
+Entrada das melhorias da att 0.1.1
+Melhorias no sistema de Payhunt
+Adicionado Voltar para a Payhunt
+Adicionado Opção de remover payhunt caso ele morra dentro faltando x minutos
+Refeito Hold Mw / Grav do vBot
+Melhorias no Configurar bot
+
 V0.1.2 -- 03/10/2026
 Peço desculpa pela ultima atualização, já estou procurando a raiz do problema para atualizar novamente
 Revertido a Atualização v0.1.1 para v0.1.0
