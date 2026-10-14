@@ -16,14 +16,14 @@ end
 -- here you can set manually order of scripts
 -- libraries should be loaded first
 local luaFiles = {
-  "main",
+  -- "main",
   "items",
   "vlib",
   "new_cavebot_lib",
   "configs", -- do not change this and above
   "extras",
   "cavebot",
-  "playerlist",
+  -- "playerlist",
   -- Disabled in the classic Holiday vBot profile. Players may enable these
   -- modules manually in their own profile when they actually use them.
   -- "BotServer",

@@ -113,24 +113,3 @@ depositerPanel.title.onDoubleClick = function(widget)
     table.insert(config.items, {id=0, index=0})
     refreshEntries()
 end
-
-function getStashingIndex(id)
-    for _, v in pairs(config.items) do
-        if v.id == id then
-            return v.index - 1
-        end
-    end
-end
-
-UI.Separator()
-UI.Label("Sell Exeptions")
-
-if type(storage.cavebotSell) ~= "table" then
-  storage.cavebotSell = {23544, 3081}
-end
-
-local sellContainer = UI.Container(function(widget, items)
-  storage.cavebotSell = items
-end, true)
-sellContainer:setHeight(35)
-sellContainer:setItems(storage.cavebotSell)
