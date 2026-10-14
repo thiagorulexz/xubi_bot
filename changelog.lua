@@ -8,6 +8,22 @@
 -- (return { "linha", "linha" }). O bot aceita os tres.
 
 return [[
+V0.1.4 -- 13/10/2026
+Adicionado Auto Levitate
+Correções no profile do bot
+Adicionado Hide Spells
+Adicionado Hide Missils
+Reformulado todo o Draw do Layout do Bot
+Adicionado Configurar Layout
+Corrigido Outfith Manager
+Adicionado Auto Food
+Integrado Ant Pk Escada
+Adicionado Vocation detector
+Melhoria no sistema de Hotkeys
+Melhoria no Abrir Backpack
+Adiciona redirecionamento ao Discord
+Adicionado Sistema de Icons Global
+
 V0.1.3 -- 09/10/2026
 Otimização melhorada
 Entrada das melhorias da att 0.1.1
