@@ -8,6 +8,16 @@
 -- (return { "linha", "linha" }). O bot aceita os tres.
 
 return [[
+v0.1.5 -- 19/10/2026
+Melhoria no Daytask
+Melhoria no Payhunt
+Corrigido problemas com alavancas em determinados local do mapa
+Adicionado Fast Relogin
+Melhoria Spells Atk
+Melhoria no Coletar itens
+Reescrito Layout do bot, anterior continha erros de sintaxe
+Melhoria Look
+
 V0.1.4 -- 13/10/2026
 Adicionado Auto Levitate
 Correções no profile do bot
