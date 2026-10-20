@@ -17,6 +17,7 @@ Melhoria Spells Atk
 Melhoria no Coletar itens
 Reescrito Layout do bot, anterior continha erros de sintaxe
 Melhoria Look
+Adicionado Revive no amuleto ([+] Amuleto)
 
 V0.1.4 -- 13/10/2026
 Adicionado Auto Levitate
