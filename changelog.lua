@@ -8,6 +8,9 @@
 -- (return { "linha", "linha" }). O bot aceita os tres.
 
 return [[
+V0.1.6 -- 19/10/2026
+Emergency Fix
+
 v0.1.5 -- 19/10/2026
 Melhoria no Daytask
 Melhoria no Payhunt
