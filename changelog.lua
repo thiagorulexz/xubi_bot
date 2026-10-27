@@ -8,19 +8,11 @@
 -- (return { "linha", "linha" }). O bot aceita os tres.
 
 return [[
-V0.1.8 -- 24/10/2026
-Melhoria no Daytask
-Melhoria no Payhunt
-Corrigido problemas com alavancas em determinados local do mapa
-Adicionado Fast Relogin
+V0.1.9 -- 26/10/2026
+Melhoria na conexão do jogador
 Melhoria Spells Atk
 Melhoria no Coletar itens
-Reescrito Layout do bot, anterior continha erros de sintaxe
-Melhoria Look
-Auto Desintegrate
+Melhoria Auto Desintegrate
 Separado AFK BOT da PAYHUNT agora o jogador consegue usar item mesmo fora do trainer
-Trava FullChase Templo
-Trava Follow Templo
-Corrigido Haste
-Adicionado Sistema BlockPay
+Melhorado Sistema BlockPay
 ]]
