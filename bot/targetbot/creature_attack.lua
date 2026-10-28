@@ -148,7 +148,11 @@ TargetBot.Creature.walk = function(creature, config, targets)
   if config.closeLure and config.closeLureAmount <= getMonsters(1) then
     return TargetBot.allowCaveBot(150)
   end
-  if TargetBot.canLure() and (config.lure or config.lureCavebot or config.dynamicLure) and not (creature:getHealthPercent() < (storage.extras.killUnder or 30)) and not isTrapped then
+  -- mesmo default (1 = desligado) da checagem de chase mais abaixo; antes aqui
+  -- caia em 30 quando o perfil nao tinha killUnder salvo, e o lure parava pra
+  -- finalizar qualquer alvo abaixo de 30% de vida
+  local killUnder = (storage.extras and tonumber(storage.extras.killUnder)) or 1
+  if TargetBot.canLure() and (config.lure or config.lureCavebot or config.dynamicLure) and not (creature:getHealthPercent() < killUnder) and not isTrapped then
     if targetBotLure then
       anchorPosition = nil
       return TargetBot.allowCaveBot(150)
@@ -167,7 +171,6 @@ TargetBot.Creature.walk = function(creature, config, targets)
     end
   end
 
-  local killUnder = (storage.extras and tonumber(storage.extras.killUnder)) or 1
   local currentDistance = findPath(pos, cpos, 10, {ignoreCreatures=true, ignoreNonPathable=true, ignoreCost=true})
   if (not config.chase or #currentDistance == 1) and not config.avoidAttacks and not config.keepDistance and config.rePosition and (creature:getHealthPercent() >= killUnder) then
     return rePosition(config.rePositionAmount or 6)
