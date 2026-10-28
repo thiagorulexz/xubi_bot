@@ -8,11 +8,8 @@
 -- (return { "linha", "linha" }). O bot aceita os tres.
 
 return [[
-V0.1.9 -- 26/10/2026
+V0.2.0 -- 28/10/2026
 Melhoria na conexão do jogador
-Melhoria Spells Atk
-Melhoria no Coletar itens
-Melhoria Auto Desintegrate
-Separado AFK BOT da PAYHUNT agora o jogador consegue usar item mesmo fora do trainer
-Melhorado Sistema BlockPay
+Melhoria no bot interno
+Melhoria na liberação da key
 ]]
