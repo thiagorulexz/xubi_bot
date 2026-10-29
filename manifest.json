@@ -3,4 +3,6 @@
   "repo": "thiagorulexz/xubi_bot",
   "branch": "main",
   "dir": "bot"
+  "minimap_version": 1,
+  "minimap_file": "minimap.otmm"
 }
