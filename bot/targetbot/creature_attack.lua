@@ -21,8 +21,9 @@ end
 
 function rePosition(minTiles)
   minTiles = minTiles or 8
-  if now - lastCall < 500 then return end
+  if now - (lastCall or 0) < 500 then return end
   local pPos = player:getPosition()
+  if not pPos then return end
   local tiles = getNearTiles(pPos)
   local playerTilesCount = getWalkableTilesCount(pPos)
   local tilesTable = {}
@@ -52,8 +53,10 @@ TargetBot.Creature.attack = function(params, targets, isLooting) -- params {conf
     lastWalk = now
   end
 
-  local config = params.config
+  if not params then return end
+  local config = params.config or {}
   local creature = params.creature
+  if not creature then return end
   
   if not modules.game_bot.ensureAttackTarget(creature, isLooting) then
     return
@@ -64,60 +67,65 @@ TargetBot.Creature.attack = function(params, targets, isLooting) -- params {conf
   end
 
   -- attacks
-  local mana = player:getMana()
-  if config.useGroupAttack and config.groupAttackSpell:len() > 1 and mana > config.minManaGroup then
-    local creatures = g_map.getSpectatorsInRange(player:getPosition(), false, config.groupAttackRadius, config.groupAttackRadius)
+  local mana = player:getMana() or 0
+  if config.useGroupAttack and config.groupAttackSpell and config.groupAttackSpell:len() > 1 and mana > (tonumber(config.minManaGroup) or 0) then
+    local radius = tonumber(config.groupAttackRadius) or 3
+    local creatures = g_map.getSpectatorsInRange(player:getPosition(), false, radius, radius)
     local playersAround = false
     local monsters = 0
     for _, creature in ipairs(creatures) do
-      if not creature:isLocalPlayer() and creature:isPlayer() and (not config.groupAttackIgnoreParty or creature:getShield() <= 2) then
+      if not creature:isLocalPlayer() and creature:isPlayer() and (not config.groupAttackIgnoreParty or (creature:getShield() or 0) <= 2) then
         playersAround = true
       elseif creature:isMonster() then
         monsters = monsters + 1
       end
     end
-    if monsters >= config.groupAttackTargets and (not playersAround or config.groupAttackIgnorePlayers) then
-      if TargetBot.sayAttackSpell(config.groupAttackSpell, config.groupAttackDelay) then
+    if monsters >= (tonumber(config.groupAttackTargets) or 1) and (not playersAround or config.groupAttackIgnorePlayers) then
+      if TargetBot.sayAttackSpell(config.groupAttackSpell, tonumber(config.groupAttackDelay) or 1000) then
         return
       end
     end
   end
 
-  if config.useGroupAttackRune and config.groupAttackRune > 100 then
-    local creatures = g_map.getSpectatorsInRange(creature:getPosition(), false, config.groupRuneAttackRadius, config.groupRuneAttackRadius)
+  if config.useGroupAttackRune and (tonumber(config.groupAttackRune) or 0) > 100 then
+    local radius = tonumber(config.groupRuneAttackRadius) or 3
+    local creatures = g_map.getSpectatorsInRange(creature:getPosition(), false, radius, radius)
     local playersAround = false
     local monsters = 0
     for _, creature in ipairs(creatures) do
-      if not creature:isLocalPlayer() and creature:isPlayer() and (not config.groupAttackIgnoreParty or creature:getShield() <= 2) then
+      if not creature:isLocalPlayer() and creature:isPlayer() and (not config.groupAttackIgnoreParty or (creature:getShield() or 0) <= 2) then
         playersAround = true
       elseif creature:isMonster() then
         monsters = monsters + 1
       end
     end
-    if monsters >= config.groupRuneAttackTargets and (not playersAround or config.groupAttackIgnorePlayers) then
-      if TargetBot.useAttackItem(config.groupAttackRune, 0, creature, config.groupRuneAttackDelay) then
+    if monsters >= (tonumber(config.groupRuneAttackTargets) or 1) and (not playersAround or config.groupAttackIgnorePlayers) then
+      if TargetBot.useAttackItem(config.groupAttackRune, 0, creature, tonumber(config.groupRuneAttackDelay) or 1000) then
         return
       end
     end
   end
-  if config.useSpellAttack and config.attackSpell:len() > 1 and mana > config.minMana then
-    if TargetBot.sayAttackSpell(config.attackSpell, config.attackSpellDelay) then
+  if config.useSpellAttack and config.attackSpell and config.attackSpell:len() > 1 and mana > (tonumber(config.minMana) or 0) then
+    if TargetBot.sayAttackSpell(config.attackSpell, tonumber(config.attackSpellDelay) or 1000) then
       return
     end
   end
-  if config.useRuneAttack and config.attackRune > 100 then
-    if TargetBot.useAttackItem(config.attackRune, 0, creature, config.attackRuneDelay) then
+  if config.useRuneAttack and (tonumber(config.attackRune) or 0) > 100 then
+    if TargetBot.useAttackItem(config.attackRune, 0, creature, tonumber(config.attackRuneDelay) or 1000) then
       return
     end
   end
 end
 
 TargetBot.Creature.walk = function(creature, config, targets)
+  if not creature then return end
+  config = config or {}
+  targets = targets or 1
   local cpos = creature:getPosition()
   local pos = player:getPosition()
+  if not cpos or not pos then return end
   
   local isTrapped = true
-  local pos = player:getPosition()
   local dirs = {{-1,1}, {0,1}, {1,1}, {-1, 0}, {1, 0}, {-1, -1}, {0, -1}, {1, -1}}
   for i=1,#dirs do
     local tile = g_map.getTile({x=pos.x-dirs[i][1],y=pos.y-dirs[i][2],z=pos.z})
@@ -127,37 +135,38 @@ TargetBot.Creature.walk = function(creature, config, targets)
   end
 
   -- data for external dynamic lure
-  if config.lureMin and config.lureMax and config.dynamicLure then
-    if config.lureMin >= targets then
+  local lureMin = tonumber(config.lureMin)
+  local lureMaxVal = tonumber(config.lureMax)
+  if lureMin and lureMaxVal and config.dynamicLure then
+    if lureMin >= targets then
       targetBotLure = true
-    elseif targets >= config.lureMax then
+    elseif targets >= lureMaxVal then
       targetBotLure = false
     end
   end
   targetCount = targets
-  delayValue = config.lureDelay
+  delayValue = tonumber(config.lureDelay) or 250
 
-  if config.lureMax then
-    lureMax = config.lureMax
+  if lureMaxVal then
+    lureMax = lureMaxVal
   end
 
   dynamicLureDelay = config.dynamicLureDelay
-  delayFrom = config.delayFrom
+  delayFrom = tonumber(config.delayFrom)
 
   -- luring
-  if config.closeLure and config.closeLureAmount <= getMonsters(1) then
+  if config.closeLure and (tonumber(config.closeLureAmount) or 3) <= (getMonsters(1) or 0) then
     return TargetBot.allowCaveBot(150)
   end
-  -- mesmo default (1 = desligado) da checagem de chase mais abaixo; antes aqui
-  -- caia em 30 quando o perfil nao tinha killUnder salvo, e o lure parava pra
-  -- finalizar qualquer alvo abaixo de 30% de vida
+
   local killUnder = (storage.extras and tonumber(storage.extras.killUnder)) or 1
-  if TargetBot.canLure() and (config.lure or config.lureCavebot or config.dynamicLure) and not (creature:getHealthPercent() < killUnder) and not isTrapped then
+  local creatureHp = creature:getHealthPercent() or 100
+  if TargetBot.canLure() and (config.lure or config.lureCavebot or config.dynamicLure) and not (creatureHp < killUnder) and not isTrapped then
     if targetBotLure then
       anchorPosition = nil
       return TargetBot.allowCaveBot(150)
     else
-      if targets < config.lureCount then
+      if targets < (tonumber(config.lureCount) or 1) then
         if config.lureCavebot then
           anchorPosition = nil
           return TargetBot.allowCaveBot(150)
@@ -172,22 +181,26 @@ TargetBot.Creature.walk = function(creature, config, targets)
   end
 
   local currentDistance = findPath(pos, cpos, 10, {ignoreCreatures=true, ignoreNonPathable=true, ignoreCost=true})
-  if (not config.chase or #currentDistance == 1) and not config.avoidAttacks and not config.keepDistance and config.rePosition and (creature:getHealthPercent() >= killUnder) then
+  local distLen = (currentDistance and #currentDistance) or 10
+
+  if (not config.chase or distLen == 1) and not config.avoidAttacks and not config.keepDistance and config.rePosition and (creatureHp >= killUnder) then
     return rePosition(config.rePositionAmount or 6)
   end
-  if ((killUnder > 1 and (creature:getHealthPercent() < killUnder)) or config.chase) and not config.keepDistance then
-    if #currentDistance > 1 then
+  if ((killUnder > 1 and (creatureHp < killUnder)) or config.chase) and not config.keepDistance then
+    if distLen > 1 then
       return TargetBot.walkTo(cpos, 10, {ignoreNonPathable=true, precision=1})
     end
   elseif config.keepDistance then
-    if not anchorPosition or distanceFromPlayer(anchorPosition) > config.anchorRange then
+    local anchorRange = tonumber(config.anchorRange) or 3
+    local keepDistRange = tonumber(config.keepDistanceRange) or 1
+    if not anchorPosition or (distanceFromPlayer(anchorPosition) or 0) > anchorRange then
       anchorPosition = pos
     end
-    if #currentDistance ~= config.keepDistanceRange and #currentDistance ~= config.keepDistanceRange + 1 then
-      if config.anchor and anchorPosition and getDistanceBetween(pos, anchorPosition) <= config.anchorRange*2 then
-        return TargetBot.walkTo(cpos, 10, {ignoreNonPathable=true, marginMin=config.keepDistanceRange, marginMax=config.keepDistanceRange + 1, maxDistanceFrom={anchorPosition, config.anchorRange}})
+    if distLen ~= keepDistRange and distLen ~= keepDistRange + 1 then
+      if config.anchor and anchorPosition and (getDistanceBetween(pos, anchorPosition) or 0) <= anchorRange*2 then
+        return TargetBot.walkTo(cpos, 10, {ignoreNonPathable=true, marginMin=keepDistRange, marginMax=keepDistRange + 1, maxDistanceFrom={anchorPosition, anchorRange}})
       else
-        return TargetBot.walkTo(cpos, 10, {ignoreNonPathable=true, marginMin=config.keepDistanceRange, marginMax=config.keepDistanceRange + 1})
+        return TargetBot.walkTo(cpos, 10, {ignoreNonPathable=true, marginMin=keepDistRange, marginMax=keepDistRange + 1})
       end
     end
   end
@@ -240,10 +253,11 @@ end
 onPlayerPositionChange(function(newPos, oldPos)
   if CaveBot.isOff() then return end
   if TargetBot.isOff() then return end
-  if not lureMax then return end
+  if not lureMax or lureMax == 0 then return end
   if storage.TargetBotDelayWhenPlayer then return end
   if not dynamicLureDelay then return end
 
-  if targetCount < (delayFrom or lureMax/2) or not target() then return end
+  local threshold = delayFrom or (lureMax / 2)
+  if (targetCount or 0) < (threshold or 0) or not target() then return end
   CaveBot.delay(delayValue or 0)
 end)
