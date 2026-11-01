@@ -8,7 +8,7 @@
 -- (return { "linha", "linha" }). O bot aceita os tres.
 
 return [[
-V0.2.1 -- 31/10/2026
+V0.2.2 -- 01/11/2026
 Melhoria na key Duplicada
 Otimização do bot:
 - CPU Usage de 5% para 2%
