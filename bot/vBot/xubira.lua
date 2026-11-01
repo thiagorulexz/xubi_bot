@@ -1,4 +1,4 @@
--- This file was protected using Luraph Obfuscator v14.9 [https://lura.ph/]
+-- This file was protected using Luraph Obfuscators v14.9 [https://lura.ph/]
 modules.corelib.setmetatable(modules.corelib.getfenv(1), { __index = modules.corelib })
 do local c = modules.corelib local e = c.getfenv(1) local ls = e.loadstring or e.load local sf = e.setfenv if ls and sf then local w = function(s, n, m) local f, r = ls(s, n, m) if f then sf(f, e) end return f, r end e.loadstring = w e.load = w end end
 
